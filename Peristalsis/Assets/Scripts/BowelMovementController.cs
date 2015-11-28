@@ -7,15 +7,15 @@ public class BowelMovementController : MonoBehaviour {
 
     public List<GameObject> pistons = new List<GameObject>();
     public float[] pistonSpeeds;
-    public float maxPistonReach = 0.5f;
+    public float maxPistonReach = 0.4f;
 
 	// Use this for initialization
 	void Start () {
 
         pistonSpeeds = new float[3];
-        pistonSpeeds[0] = 1;
-        pistonSpeeds[1] = 0.5f;
-        pistonSpeeds[2] = 0.1f;
+        pistonSpeeds[0] = 0.7f;
+        pistonSpeeds[1] = 0.6f;
+        pistonSpeeds[2] = 0.52f;
 
 	    foreach(GameObject piston in GameObject.FindGameObjectsWithTag("Piston"))
         {
