@@ -25,19 +25,15 @@ public class BowelMovementController : MonoBehaviour {
         pegStartPos[1] = sliderPegs[1].transform.position.y;
         pegStartPos[2] = sliderPegs[2].transform.position.y;
 
-
-
 	    foreach(GameObject piston in GameObject.FindGameObjectsWithTag("Piston"))
         {
             pistons.Add(piston);
         }
 
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 
         // Move pistons
         foreach(GameObject Piston in pistons)
@@ -47,35 +43,29 @@ public class BowelMovementController : MonoBehaviour {
             // Reverse dir
             if (p.forward && t > maxPistonReach)
             {
-                
                 p.forward = false;
-
-            } 
+            }
 
             if (!p.forward && t < -maxPistonReach)
             {
                 p.forward = true;
             }
+
             float moveAmount = pistonSpeeds[p.group - 1] * Time.deltaTime;
 
             if(p.forward)
             {
                 // move forward
-
                 p.trajectory += moveAmount;
                 p.transform.Translate(Vector3.up * moveAmount);
 
-            } else
+            } else if(!p.forward)
             {
                 // move backwards by speed
                 p.trajectory -= moveAmount;
                 p.transform.Translate(Vector3.up * -moveAmount);
-
             }
-       
         }
-
-	
 
         // Keyboard controls
         if(Input.GetKey(KeyCode.Q) && pistonSpeeds[0] < maxSpeed)
@@ -83,7 +73,6 @@ public class BowelMovementController : MonoBehaviour {
             sliderPegs[0].transform.position = new Vector2(sliderPegs[0].transform.position.x, pegStartPos[0] + pistonSpeeds[0]);
             pistonSpeeds[0] += Time.deltaTime;
             Mathf.Clamp(pistonSpeeds[0], -maxSpeed, maxSpeed);
-
         }
         if (Input.GetKey(KeyCode.A) && pistonSpeeds[0] > -maxSpeed)
         {
@@ -102,7 +91,6 @@ public class BowelMovementController : MonoBehaviour {
             pistonSpeeds[1] -= Time.deltaTime;
 
         }
-
         if (Input.GetKey(KeyCode.E) && pistonSpeeds[2] < maxSpeed)
         {
             sliderPegs[2].transform.position = new Vector2(sliderPegs[2].transform.position.x, pegStartPos[2] + pistonSpeeds[2]);
@@ -112,10 +100,7 @@ public class BowelMovementController : MonoBehaviour {
         {
             sliderPegs[2].transform.position = new Vector2(sliderPegs[2].transform.position.x, pegStartPos[2] + pistonSpeeds[2]);
             pistonSpeeds[2] -= Time.deltaTime;
-
         }
-
-
         Mathf.Clamp(pistonSpeeds[0], -maxSpeed, maxSpeed);
         Mathf.Clamp(pistonSpeeds[1], -maxSpeed, maxSpeed);
         Mathf.Clamp(pistonSpeeds[2], -maxSpeed, maxSpeed);
